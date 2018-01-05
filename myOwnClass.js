@@ -2,24 +2,19 @@
 // не робить
 
 class EventEmitter {
-  construcor ()
-  {
+  constructor () {
     this.events = {};
   }
 
   on(eventName, fn) {
-    const event = this.events[eventName];
+    const event = this.events[eventName] || [];
     this.events[eventName] = event;
     event.push(fn);
   }
 
-  emit(eventName, date) {
-    const event = this.event[eventName];
-    if (event) {
-      event.forEach(function (fn) {
-        return(fn.calls(null,date));
-      })
-    }
+  emit(eventName, ...data) {
+    const event = this.events[eventName];
+    if (event) event.forEach(fn => fn.apply(null, data));
   }
 
 }

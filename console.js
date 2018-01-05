@@ -5,10 +5,25 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+const question = (q) => {
+  return new Promise((resolve, reject) => {
+    rl.question(q, (answer) => {
+      if (answer)
+        resolve(answer);
+      else
+        reject(new Error('Answer is empty!'));
+    });
+  });
+};
 
 (async () => {
-  await(rl.question('Привіт,як тебе звати ? ', (answer) => {
-    console.log(`Привіт, ${answer}. `);
-    rl.close();
-  }));
+  try {
+    console.log(await question('Привіт,як тебе звати ? '));
+    console.log(await question('Скільки тобі років? '));
+    console.log(await question('Коли тебе відрахують? '));
+  } catch (err) {
+    console.error(err.message);
+  }
+
+  rl.close();
 })();

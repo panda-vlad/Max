@@ -11,7 +11,7 @@ const readFile = promisify(fs.readFile);
 // );
 
 (async () => {
-   try {
+ try {
    console.log(await readFile('index.js','utf8'));
    console.log(await readFile('filename','utf8'));
  } catch (error) {
